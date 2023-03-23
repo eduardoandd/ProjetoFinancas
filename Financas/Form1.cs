@@ -54,6 +54,7 @@ namespace Financas
         private void ndValor_ValueChanged(object sender, EventArgs e)
         {
             PreencheLabelValorTotal();
+            //
         }
     }
 }
