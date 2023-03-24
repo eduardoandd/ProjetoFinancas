@@ -1,6 +1,6 @@
 ﻿namespace Financas
 {
-    partial class Form1
+    partial class FormRegistroDeGasto
     {
         /// <summary>
         ///  Required designer variable.
@@ -151,7 +151,7 @@
             0,
             0,
             131072});
-            this.ndFrete.Location = new System.Drawing.Point(148, 265);
+            this.ndFrete.Location = new System.Drawing.Point(132, 267);
             this.ndFrete.Name = "ndFrete";
             this.ndFrete.Size = new System.Drawing.Size(84, 23);
             this.ndFrete.TabIndex = 7;
