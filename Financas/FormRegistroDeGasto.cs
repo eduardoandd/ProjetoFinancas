@@ -12,12 +12,16 @@ namespace Financas
 {
     public partial class FormRegistroDeGasto : Form
     {
+        public Produto produto = null;
+
         public FormRegistroDeGasto()
         {
 
             InitializeComponent();
             PreencheLabelValorTotal();
             AtualizarComboBoxCategoria();
+            txtGasto.Select();
+
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -37,7 +41,7 @@ namespace Financas
             }
         }
 
-
+        #region Métodos para exibir o valor total
         private void PreencheLabelValorTotal()
         {
             if (ndValor.Value > 1 || ndFrete.Value > 1)
@@ -57,7 +61,10 @@ namespace Financas
             PreencheLabelValorTotal();
             
         }
+        #endregion
 
+
+        #region Atualizar Combo Box Categoria
         private void AtualizarComboBoxCategoria()
         {
             cbxCategoria.DataSource = Enum.GetNames(typeof(EnumCategoria));
@@ -65,7 +72,9 @@ namespace Financas
             //cbxCategoria.DisplayMember = "Categoria";
             cbxCategoria.SelectedIndex = -1;
         }
+        #endregion
 
+        
         private bool PreencheuTodosOsCampos()
         {
             if (string.IsNullOrWhiteSpace(txtGasto.Text)) return false;
@@ -85,8 +94,40 @@ namespace Financas
             produto.Descricao = txtDescricao.Text;
             produto.Valor = Convert.ToDouble(ndValor.Value);
             produto.ValorTotal = (double)(ndValor.Value + ndFrete.Value);
-            PreencheuTodosOsCampos()
+            PreencheuTodosOsCampos();
+        }
 
+        public void AlterarEstadoDosCampos(bool estado)
+        {
+            txtDescricao.Enabled = estado;
+            cbxCategoria.Enabled = estado;
+            dtpDataCompra.Enabled=estado;
+            ndValor.Enabled = estado;
+
+        }
+
+        private void FormRegistroDeGasto_Load(object sender, EventArgs e)
+        {
+            txtGasto.Text = produto.Nome.ToString();
+            cbxCategoria.SelectedText = produto.Categoria.ToString();
+            dtpDataCompra.Value = produto.DataCompra.Date;
+            txtDescricao.Text = produto.Descricao;
+            //ndValor.Value = produto.Valor.ToString();
+            //ndFrete.Value = (double)produto.Frete;
+               
+        }
+
+        private void btnSalvar_Click(object sender, EventArgs e)
+        {
+
+            
+            produto.Nome = txtGasto.Text;
+            produto.Categoria = (EnumCategoria)cbxCategoria.SelectedIndex;
+            produto.DataCompra = dtpDataCompra.Value.Date;
+            produto.Descricao = txtDescricao.Text;
+            produto.Valor = (double)ndValor.Value;
+            produto.Frete = (double)ndFrete.Value;
+          
         }
     }
 }

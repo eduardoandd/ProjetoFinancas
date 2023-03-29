@@ -1,6 +1,6 @@
 ﻿namespace Financas
 {
-    partial class FormRegistroDeGasto
+    public partial class FormRegistroDeGasto
     {
         /// <summary>
         ///  Required designer variable.
@@ -30,7 +30,6 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.txtGasto = new System.Windows.Forms.TextBox();
             this.dtpDataCompra = new System.Windows.Forms.DateTimePicker();
             this.cbxCategoria = new System.Windows.Forms.ComboBox();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
@@ -42,6 +41,9 @@
             this.cbxFrete = new System.Windows.Forms.CheckBox();
             this.lbValorTotal = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.txtGasto = new System.Windows.Forms.TextBox();
+            this.btnSalvar = new System.Windows.Forms.Button();
+            this.btnCancelar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.ndValor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ndFrete)).BeginInit();
             this.SuspendLayout();
@@ -66,14 +68,6 @@
             this.label3.TabIndex = 2;
             this.label3.Text = "Data";
             // 
-            // txtGasto
-            // 
-            this.txtGasto.Location = new System.Drawing.Point(22, 26);
-            this.txtGasto.Name = "txtGasto";
-            this.txtGasto.Size = new System.Drawing.Size(246, 23);
-            this.txtGasto.TabIndex = 0;
-            this.txtGasto.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
             // dtpDataCompra
             // 
             this.dtpDataCompra.Format = System.Windows.Forms.DateTimePickerFormat.Short;
@@ -88,6 +82,7 @@
             this.cbxCategoria.Location = new System.Drawing.Point(281, 26);
             this.cbxCategoria.Name = "cbxCategoria";
             this.cbxCategoria.Size = new System.Drawing.Size(142, 23);
+            this.cbxCategoria.Sorted = true;
             this.cbxCategoria.TabIndex = 1;
             // 
             // linkLabel1
@@ -174,7 +169,7 @@
             this.lbValorTotal.AutoSize = true;
             this.lbValorTotal.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lbValorTotal.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.lbValorTotal.Location = new System.Drawing.Point(297, 267);
+            this.lbValorTotal.Location = new System.Drawing.Point(243, 253);
             this.lbValorTotal.Name = "lbValorTotal";
             this.lbValorTotal.Size = new System.Drawing.Size(146, 37);
             this.lbValorTotal.TabIndex = 15;
@@ -191,11 +186,42 @@
             this.label6.TabIndex = 16;
             this.label6.Text = "Categoria";
             // 
-            // Form1
+            // txtGasto
+            // 
+            this.txtGasto.Location = new System.Drawing.Point(22, 26);
+            this.txtGasto.Name = "txtGasto";
+            this.txtGasto.Size = new System.Drawing.Size(194, 23);
+            this.txtGasto.TabIndex = 18;
+            // 
+            // btnSalvar
+            // 
+            this.btnSalvar.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.btnSalvar.Location = new System.Drawing.Point(483, 292);
+            this.btnSalvar.Name = "btnSalvar";
+            this.btnSalvar.Size = new System.Drawing.Size(75, 23);
+            this.btnSalvar.TabIndex = 19;
+            this.btnSalvar.Text = "Salvar";
+            this.btnSalvar.UseVisualStyleBackColor = true;
+            this.btnSalvar.Click += new System.EventHandler(this.btnSalvar_Click);
+            // 
+            // btnCancelar
+            // 
+            this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnCancelar.Location = new System.Drawing.Point(402, 292);
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.Size = new System.Drawing.Size(75, 23);
+            this.btnCancelar.TabIndex = 20;
+            this.btnCancelar.Text = "Cancelar";
+            this.btnCancelar.UseVisualStyleBackColor = true;
+            // 
+            // FormRegistroDeGasto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(586, 337);
+            this.Controls.Add(this.btnCancelar);
+            this.Controls.Add(this.btnSalvar);
+            this.Controls.Add(this.txtGasto);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.lbValorTotal);
             this.Controls.Add(this.cbxFrete);
@@ -207,12 +233,12 @@
             this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.cbxCategoria);
             this.Controls.Add(this.dtpDataCompra);
-            this.Controls.Add(this.txtGasto);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label1);
-            this.Name = "Form1";
+            this.Name = "FormRegistroDeGasto";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Registrar gasto..";
+            this.Load += new System.EventHandler(this.FormRegistroDeGasto_Load);
             ((System.ComponentModel.ISupportInitialize)(this.ndValor)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ndFrete)).EndInit();
             this.ResumeLayout(false);
@@ -224,7 +250,6 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox txtGasto;
         private System.Windows.Forms.DateTimePicker dtpDataCompra;
         private System.Windows.Forms.ComboBox cbxCategoria;
         private System.Windows.Forms.LinkLabel linkLabel1;
@@ -236,5 +261,8 @@
         private System.Windows.Forms.CheckBox cbxFrete;
         private System.Windows.Forms.Label lbValorTotal;
         private System.Windows.Forms.Label label6;
+        public System.Windows.Forms.TextBox txtGasto;
+        private System.Windows.Forms.Button btnSalvar;
+        private System.Windows.Forms.Button btnCancelar;
     }
 }

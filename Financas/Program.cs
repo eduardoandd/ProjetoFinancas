@@ -17,7 +17,7 @@ namespace Financas
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormRegistroDeGasto());
+            Application.Run(new FormGrdFinancas());
         }
     }
 }
