@@ -74,17 +74,21 @@ namespace Financas
         }
         #endregion
 
-        
+
+        #region Método para verificar se preencheu todos os campos
         private bool PreencheuTodosOsCampos()
         {
+            
             if (string.IsNullOrWhiteSpace(txtGasto.Text)) return false;
             if (cbxCategoria.SelectedIndex < 0) return false;
             if (dtpDataCompra.Value.Date > DateTime.Now.Date) return false;
             if (string.IsNullOrWhiteSpace(txtDescricao.Text)) return false;
             if (ndValor.Value <= 0) return false;
+            
 
             return true;
         }
+        #endregion
 
         public void PreencherProdutoComCampos(Produto produto)
         {
@@ -119,15 +123,12 @@ namespace Financas
 
         private void btnSalvar_Click(object sender, EventArgs e)
         {
-
-            
             produto.Nome = txtGasto.Text;
             produto.Categoria = (EnumCategoria)cbxCategoria.SelectedIndex;
             produto.DataCompra = dtpDataCompra.Value.Date;
             produto.Descricao = txtDescricao.Text;
             produto.Valor = (double)ndValor.Value;
-            produto.Frete = (double)ndFrete.Value;
-          
+            produto.Frete = (double)ndFrete.Value;          
         }
     }
 }
