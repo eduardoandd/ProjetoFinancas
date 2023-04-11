@@ -89,5 +89,10 @@ namespace Financas
             }
         }
         #endregion
+
+        private void FormGrdFinancas_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

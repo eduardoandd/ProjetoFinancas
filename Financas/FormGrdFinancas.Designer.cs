@@ -146,6 +146,7 @@
             this.Controls.Add(this.grdFinancas);
             this.Name = "FormGrdFinancas";
             this.Text = "FormGrdFinancas";
+            this.Load += new System.EventHandler(this.FormGrdFinancas_Load);
             ((System.ComponentModel.ISupportInitialize)(this.grdFinancas)).EndInit();
             this.ResumeLayout(false);
 
