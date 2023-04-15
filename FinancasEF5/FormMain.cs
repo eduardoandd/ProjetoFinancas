@@ -29,10 +29,44 @@ namespace FinancasEF5
             {
                 AtualizarCbxCategoria(db);
                 AtualizarProdutos(db);
+                ModificarCelulaGrid();
             }
         }
 
-        #region Método para adicionar gasto.
+
+        private void ExibirValorTotalDaCategoria()
+        {
+            lbValorTotalCategoria.Visible = true;
+            decimal soma = 0;
+            for (int i = 0; i < grdGasto.Rows.Count; i++)
+            {
+                soma += Convert.ToDecimal(grdGasto.Rows[i].Cells[7].Value);
+            }
+            lbValorTotalCategoria.Text = $"O valor total é: {soma.ToString()}";
+
+        }
+
+
+
+        #region Métodos auxiliares do grid
+        private void grdGasto_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            btnAlterarGasto_Click(sender, e);
+        }
+
+
+        private void ModificarCelulaGrid()
+        {
+            grdGasto.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
+            grdGasto.AutoResizeColumns();
+            grdGasto.AllowUserToResizeColumns = true;
+            grdGasto.AllowUserToOrderColumns = true;
+
+            grdGasto.Columns["clmValorFrete"].Width = 50;
+        }
+        #endregion
+
+        #region CRUD gasto.
         private void btnAdicionarGasto_Click(object sender, EventArgs e)
         {
             using (var form = new FormAdicionarGasto())
@@ -62,63 +96,16 @@ namespace FinancasEF5
 
             }
         }
-        #endregion
-
-        #region Método atualizar Grid e ComboBox
-            private void AtualizarProdutos(GastoContexto db)
-            {
-                if (cbxCategoria.Items.Count > 0)
-                {
-                    this.Cursor = Cursors.WaitCursor;
-                    int idCategoria = (cbxCategoria.SelectedItem as Categoria).IdCategoria;
-                    grdGasto.DataSource = db.Gastos.
-                        Where(x => x.IdCategoria == idCategoria).
-                        Include(x => x.Categoria).ToList();
-                    grdGasto.Columns.Remove(grdGasto.Columns["IdCategoria"]);
-                    grdGasto.Columns.Remove(grdGasto.Columns["Categoria"]);
-                    this.Cursor = Cursors.Default;
-
-                }
-            }
-
-            private void AtualizarCbxCategoria(GastoContexto db)
-            {
-                cbxCategoria.DataSource = db.Categorias.ToList();
-                cbxCategoria.DisplayMember = "Nome";
-                cbxCategoria.ValueMember = "IdCategoria";
-            }
-
-            private void cbxCategoria_Click(object sender, EventArgs e)
-            {
-                using (var db = new GastoContexto())
-                {
-                    AtualizarCbxCategoria(db);
-                    //AtualizarProdutos(db);
-                }
-            }
-
-            private void cbxCategoria_SelectedIndexChanged(object sender, EventArgs e)
-            {
-                using (var db = new GastoContexto())
-                {
-                    //AtualizarCbxCategoria(db);
-                    AtualizarProdutos(db);
-                }
-            }
-
-
-        #endregion
-
         private void btnAlterarGasto_Click(object sender, EventArgs e)
         {
             DataGridViewRow linhaSelecionada = null;
-            if(grdGasto.SelectedRows.Count > 0)
+            if (grdGasto.SelectedRows.Count > 0)
             {
                 linhaSelecionada = grdGasto.SelectedRows[0];
                 Gasto gasto = linhaSelecionada.DataBoundItem as Gasto;
-                using(var form = new FormAdicionarGasto())
+                using (var form = new FormAdicionarGasto())
                 {
-                   
+
                     form.Text = "Alteração de produto...";
                     form.txtGasto.Text = gasto.Nome;
                     form.cbxCategoria.SelectedIndex = form.cbxCategoria.FindString(gasto.Categoria.Nome);
@@ -152,15 +139,10 @@ namespace FinancasEF5
             }
         }
 
-        private void grdGasto_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            btnAlterarGasto_Click(sender, e);
-        }
-
         private void btnExcluirGasto_Click(object sender, EventArgs e)
         {
             DataGridViewRow linhaSelecionada = null;
-            if(grdGasto.SelectedRows.Count > 0)
+            if (grdGasto.SelectedRows.Count > 0)
             {
                 linhaSelecionada = grdGasto.SelectedRows[0];
                 Gasto gasto = linhaSelecionada.DataBoundItem as Gasto;
@@ -175,9 +157,73 @@ namespace FinancasEF5
                         SimpleMessage.Inform("Produto excluido com sucesso.");
                     }
                 }
+            }
+        }
 
+
+        #endregion
+
+        #region Método atualizar Grid e ComboBox
+        private void AtualizarProdutos(GastoContexto db)
+        {
+            
+            if (cbxCategoria.SelectedIndex == -1)
+            {
+                this.Cursor = Cursors.WaitCursor;
+                //int idCategoria = (cbxCategoria.SelectedItem as Categoria).IdCategoria;
+                grdGasto.DataSource = db.Gastos.
+                //Where(x => x.IdCategoria == idCategoria).
+                Include(x => x.Categoria).ToList();
+                grdGasto.Columns.Remove(grdGasto.Columns["IdCategoria"]);
+                grdGasto.Columns.Remove(grdGasto.Columns["Categoria"]);
+
+                this.Cursor = Cursors.Default;
+            }
+            else
+            {
+                this.Cursor = Cursors.WaitCursor;
+
+                int idCategoria = (cbxCategoria.SelectedItem as Categoria).IdCategoria;
+                grdGasto.DataSource = db.Gastos.
+                Where(x => x.IdCategoria == idCategoria).
+                Include(x => x.Categoria).ToList();
+                grdGasto.Columns.Remove(grdGasto.Columns["IdCategoria"]);
+                grdGasto.Columns.Remove(grdGasto.Columns["Categoria"]);
+
+                this.Cursor = Cursors.Default;
             }
 
+            ExibirValorTotalDaCategoria();
+            //AtualizarCbxCategoria(db);
+         }
+
+        private void AtualizarCbxCategoria(GastoContexto db)
+        {
+            cbxCategoria.DataSource = db.Categorias.ToList();
+            cbxCategoria.DisplayMember = "Nome";
+            cbxCategoria.SelectedIndex = -1;
+            cbxCategoria.ValueMember = "IdCategoria";
         }
+
+        private void cbxCategoria_Click(object sender, EventArgs e)
+        {
+            using (var db = new GastoContexto())
+            {
+                AtualizarCbxCategoria(db);
+                //AtualizarProdutos(db);
+            }
+        }
+
+        private void cbxCategoria_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            using (var db = new GastoContexto())
+            {
+                //AtualizarCbxCategoria(db);
+                AtualizarProdutos(db);
+                //ExibirValorTotalDaCategoria();
+            }
+        }
+        #endregion
+        
     }
 }

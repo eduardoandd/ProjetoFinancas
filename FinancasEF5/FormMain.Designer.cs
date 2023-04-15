@@ -43,6 +43,7 @@
             this.btnAdicionarGasto = new System.Windows.Forms.Button();
             this.btnAlterarGasto = new System.Windows.Forms.Button();
             this.btnExcluirGasto = new System.Windows.Forms.Button();
+            this.lbValorTotalCategoria = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.grdGasto)).BeginInit();
             this.SuspendLayout();
             // 
@@ -83,12 +84,12 @@
             this.clmValorFrete,
             this.clmTemFrete,
             this.clmValorFinal});
-            this.grdGasto.Location = new System.Drawing.Point(12, 66);
+            this.grdGasto.Location = new System.Drawing.Point(22, 54);
             this.grdGasto.Name = "grdGasto";
             this.grdGasto.ReadOnly = true;
             this.grdGasto.RowTemplate.Height = 25;
             this.grdGasto.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.grdGasto.Size = new System.Drawing.Size(863, 343);
+            this.grdGasto.Size = new System.Drawing.Size(1077, 356);
             this.grdGasto.TabIndex = 3;
             this.grdGasto.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grdGasto_CellDoubleClick);
             // 
@@ -98,6 +99,7 @@
             this.clmIdGasto.HeaderText = "ID";
             this.clmIdGasto.Name = "clmIdGasto";
             this.clmIdGasto.ReadOnly = true;
+            this.clmIdGasto.Width = 45;
             // 
             // clmNome
             // 
@@ -105,6 +107,7 @@
             this.clmNome.HeaderText = "Nome";
             this.clmNome.Name = "clmNome";
             this.clmNome.ReadOnly = true;
+            this.clmNome.Width = 66;
             // 
             // clmDataCompra
             // 
@@ -112,6 +115,7 @@
             this.clmDataCompra.HeaderText = "Data da compra";
             this.clmDataCompra.Name = "clmDataCompra";
             this.clmDataCompra.ReadOnly = true;
+            this.clmDataCompra.Width = 109;
             // 
             // clmDescricao
             // 
@@ -119,6 +123,7 @@
             this.clmDescricao.HeaderText = "Descrição";
             this.clmDescricao.Name = "clmDescricao";
             this.clmDescricao.ReadOnly = true;
+            this.clmDescricao.Width = 86;
             // 
             // clmValorCompra
             // 
@@ -126,6 +131,7 @@
             this.clmValorCompra.HeaderText = "Valor";
             this.clmValorCompra.Name = "clmValorCompra";
             this.clmValorCompra.ReadOnly = true;
+            this.clmValorCompra.Width = 60;
             // 
             // clmValorFrete
             // 
@@ -133,6 +139,7 @@
             this.clmValorFrete.HeaderText = "Valor do Frete";
             this.clmValorFrete.Name = "clmValorFrete";
             this.clmValorFrete.ReadOnly = true;
+            this.clmValorFrete.Width = 101;
             // 
             // clmTemFrete
             // 
@@ -140,6 +147,7 @@
             this.clmTemFrete.HeaderText = "Frete";
             this.clmTemFrete.Name = "clmTemFrete";
             this.clmTemFrete.ReadOnly = true;
+            this.clmTemFrete.Width = 43;
             // 
             // clmValorFinal
             // 
@@ -147,6 +155,7 @@
             this.clmValorFinal.HeaderText = "Valor final";
             this.clmValorFinal.Name = "clmValorFinal";
             this.clmValorFinal.ReadOnly = true;
+            this.clmValorFinal.Width = 80;
             // 
             // btnAdicionarGasto
             // 
@@ -178,11 +187,23 @@
             this.btnExcluirGasto.UseVisualStyleBackColor = true;
             this.btnExcluirGasto.Click += new System.EventHandler(this.btnExcluirGasto_Click);
             // 
+            // lbValorTotalCategoria
+            // 
+            this.lbValorTotalCategoria.AutoSize = true;
+            this.lbValorTotalCategoria.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lbValorTotalCategoria.Location = new System.Drawing.Point(790, 21);
+            this.lbValorTotalCategoria.Name = "lbValorTotalCategoria";
+            this.lbValorTotalCategoria.Size = new System.Drawing.Size(103, 25);
+            this.lbValorTotalCategoria.TabIndex = 7;
+            this.lbValorTotalCategoria.Text = "Valor total:";
+            this.lbValorTotalCategoria.Visible = false;
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(908, 435);
+            this.ClientSize = new System.Drawing.Size(1111, 462);
+            this.Controls.Add(this.lbValorTotalCategoria);
             this.Controls.Add(this.btnExcluirGasto);
             this.Controls.Add(this.btnAlterarGasto);
             this.Controls.Add(this.btnAdicionarGasto);
@@ -193,6 +214,7 @@
             this.Load += new System.EventHandler(this.FormMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.grdGasto)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -200,6 +222,9 @@
         public System.Windows.Forms.ComboBox cbxCategoria;
         private System.Windows.Forms.DataGridView grdGasto;
         private System.Windows.Forms.Button btnAdicionarGasto;
+        private System.Windows.Forms.Button btnAlterarGasto;
+        private System.Windows.Forms.Button btnExcluirGasto;
+        private System.Windows.Forms.Label lbValorTotalCategoria;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmIdGasto;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmNome;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmDataCompra;
@@ -208,7 +233,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn clmValorFrete;
         private System.Windows.Forms.DataGridViewCheckBoxColumn clmTemFrete;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmValorFinal;
-        private System.Windows.Forms.Button btnAlterarGasto;
-        private System.Windows.Forms.Button btnExcluirGasto;
     }
 }
