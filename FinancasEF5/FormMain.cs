@@ -43,7 +43,7 @@ namespace FinancasEF5
                 soma += Convert.ToDecimal(grdGasto.Rows[i].Cells[7].Value);
             }
             lbValorTotalCategoria.Text = $"O valor total é: {soma.ToString()}";
-''
+
         }
 
 
