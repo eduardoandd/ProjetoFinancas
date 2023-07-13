@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.cbxCategoria = new System.Windows.Forms.ComboBox();
@@ -44,7 +45,9 @@
             this.btnAlterarGasto = new System.Windows.Forms.Button();
             this.btnExcluirGasto = new System.Windows.Forms.Button();
             this.lbValorTotalCategoria = new System.Windows.Forms.Label();
+            this.categoriaBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.grdGasto)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.categoriaBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // cbxCategoria
@@ -87,16 +90,19 @@
             this.grdGasto.Location = new System.Drawing.Point(22, 54);
             this.grdGasto.Name = "grdGasto";
             this.grdGasto.ReadOnly = true;
+            this.grdGasto.RowHeadersWidth = 51;
             this.grdGasto.RowTemplate.Height = 25;
             this.grdGasto.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.grdGasto.Size = new System.Drawing.Size(1077, 356);
+            this.grdGasto.Size = new System.Drawing.Size(1093, 356);
             this.grdGasto.TabIndex = 3;
+            this.grdGasto.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grdGasto_CellContentClick);
             this.grdGasto.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grdGasto_CellDoubleClick);
             // 
             // clmIdGasto
             // 
             this.clmIdGasto.DataPropertyName = "IdGasto";
             this.clmIdGasto.HeaderText = "ID";
+            this.clmIdGasto.MinimumWidth = 6;
             this.clmIdGasto.Name = "clmIdGasto";
             this.clmIdGasto.ReadOnly = true;
             this.clmIdGasto.Width = 45;
@@ -105,6 +111,7 @@
             // 
             this.clmNome.DataPropertyName = "Nome";
             this.clmNome.HeaderText = "Nome";
+            this.clmNome.MinimumWidth = 6;
             this.clmNome.Name = "clmNome";
             this.clmNome.ReadOnly = true;
             this.clmNome.Width = 66;
@@ -113,6 +120,7 @@
             // 
             this.clmDataCompra.DataPropertyName = "DataCompra";
             this.clmDataCompra.HeaderText = "Data da compra";
+            this.clmDataCompra.MinimumWidth = 6;
             this.clmDataCompra.Name = "clmDataCompra";
             this.clmDataCompra.ReadOnly = true;
             this.clmDataCompra.Width = 109;
@@ -121,6 +129,7 @@
             // 
             this.clmDescricao.DataPropertyName = "Descricao";
             this.clmDescricao.HeaderText = "Descrição";
+            this.clmDescricao.MinimumWidth = 6;
             this.clmDescricao.Name = "clmDescricao";
             this.clmDescricao.ReadOnly = true;
             this.clmDescricao.Width = 86;
@@ -129,6 +138,7 @@
             // 
             this.clmValorCompra.DataPropertyName = "ValorCompra";
             this.clmValorCompra.HeaderText = "Valor";
+            this.clmValorCompra.MinimumWidth = 6;
             this.clmValorCompra.Name = "clmValorCompra";
             this.clmValorCompra.ReadOnly = true;
             this.clmValorCompra.Width = 60;
@@ -137,6 +147,7 @@
             // 
             this.clmValorFrete.DataPropertyName = "ValorFrete";
             this.clmValorFrete.HeaderText = "Valor do Frete";
+            this.clmValorFrete.MinimumWidth = 6;
             this.clmValorFrete.Name = "clmValorFrete";
             this.clmValorFrete.ReadOnly = true;
             this.clmValorFrete.Width = 101;
@@ -145,6 +156,7 @@
             // 
             this.clmTemFrete.DataPropertyName = "TemFrete";
             this.clmTemFrete.HeaderText = "Frete";
+            this.clmTemFrete.MinimumWidth = 6;
             this.clmTemFrete.Name = "clmTemFrete";
             this.clmTemFrete.ReadOnly = true;
             this.clmTemFrete.Width = 43;
@@ -153,6 +165,7 @@
             // 
             this.clmValorFinal.DataPropertyName = "ValorFinal";
             this.clmValorFinal.HeaderText = "Valor final";
+            this.clmValorFinal.MinimumWidth = 6;
             this.clmValorFinal.Name = "clmValorFinal";
             this.clmValorFinal.ReadOnly = true;
             this.clmValorFinal.Width = 80;
@@ -198,11 +211,16 @@
             this.lbValorTotalCategoria.Text = "Valor total:";
             this.lbValorTotalCategoria.Visible = false;
             // 
+            // categoriaBindingSource
+            // 
+            this.categoriaBindingSource.DataSource = typeof(FinancasEF5.Models.Categoria);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1111, 462);
+            this.AutoSize = true;
+            this.ClientSize = new System.Drawing.Size(1292, 462);
             this.Controls.Add(this.lbValorTotalCategoria);
             this.Controls.Add(this.btnExcluirGasto);
             this.Controls.Add(this.btnAlterarGasto);
@@ -210,9 +228,11 @@
             this.Controls.Add(this.grdGasto);
             this.Controls.Add(this.cbxCategoria);
             this.Name = "FormMain";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.FormMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.grdGasto)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.categoriaBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -233,5 +253,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn clmValorFrete;
         private System.Windows.Forms.DataGridViewCheckBoxColumn clmTemFrete;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmValorFinal;
+        private System.Windows.Forms.BindingSource categoriaBindingSource;
     }
 }

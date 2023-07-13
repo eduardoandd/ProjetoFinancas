@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -15,6 +16,6 @@ namespace FinancasEF5.Models
         [Required, MaxLength(100)]
         public string Nome { get; set; }
 
-        public List<Gasto> Gastos { get; set; }
+        public ObservableCollectionListSource<Gasto> Gastos { get; } = new();
     }
 }
